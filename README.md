@@ -1,10 +1,4 @@
 
-## Technologies
-- React.js (Frontend)
-- Node.js & Express.js (Backend)
-- MongoDB (Database)
-- Git & GitHub
-
 - How to Run
 
 1. Clone the repository:
