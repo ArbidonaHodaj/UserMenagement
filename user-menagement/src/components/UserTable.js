@@ -1,5 +1,5 @@
 import React from "react";
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from @mui/material
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from "@mui/material"
 import {Link} from "react-router-dom"
 
 function UserTable({ users, onDelete, onEdit }) {
@@ -14,17 +14,19 @@ function UserTable({ users, onDelete, onEdit }) {
             </TableRow>
           </TableHead>
           <TableBody>
-      {sortedUsers.map((user) => (
+      {/* {sortedUsers.map((user) => ( */}
+      {users.map((user) => (
         <TableRow key={user.id}>
           <TableCell>
             <Link to={`/users/${user.id}`}>{user.name}</Link>
           </TableCell>
           <TableCell>{user.email}</TableCell>
           <TableCell>
-            <Button color="error" onClick={() => dispatch(deleteUser(user.id))}>
+            <Button color="error" onClick={() => onDelete(user.id)}>
               Delete
             </Button>
-            <Button onClick={() => handleEdit(user)}>Edit</Button>
+            <Button onClick={() => onEdit && onEdit(user)}>Edit</Button>
+            <Button component={Link} to={`/users/${user.id}`} >Details</Button>       
           </TableCell>
         </TableRow>
       ))}

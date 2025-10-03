@@ -5,6 +5,9 @@ import SearchBar from "./components/SearchBar";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import UserDetails from "./pages/UserDetails";
 import UserForm from "./components/UserForm";
+import AddUser from "./pages/AddUser";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
 
 
 function App() {
@@ -28,24 +31,28 @@ function App() {
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  
 
   return (
     <Router>
+    <Navbar/>
+    <div style={{padding: "20px "}}>
+    <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/add" element={<AddUser />} />
+          <Route path="/users/:id" element={<UserDetails />} />
+        </Routes>
+    </div>
       <div style={{ padding: "20px" }}>
         <h1>User Management</h1>
-
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-
+          <Route  path="/"element={ 
+            <>
               {editingUser ?(
-                <form
-                onSubmit={(e) => {
-      e.preventDefault();
-      dispatch(updateUser(editingUser));
-      setEditingUser(null);
+                <form onSubmit={(e) => {
+                   e.preventDefault();
+                   dispatch(updateUser(editingUser));
+                   setEditingUser(null);
     }}
   >
     <h2>Edit User</h2>
@@ -67,17 +74,16 @@ function App() {
     <button type="button" onClick={() => setEditingUser(null)}>
       Cancel
     </button>
-  {/* <select value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
-    <option value="name">Sort by Name</option>
-    <option value="email">Sort by Email</option>
-  </select> */}
-
   </form>
 ) : (
   
   <UserForm />
   
 )}
+  {/* <select value={sortKey} onChange={(e) => setSortKey(e.target.value)}>
+    <option value="name">Sort by Name</option>
+    <option value="email">Sort by Email</option>
+  </select> */}
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                 {status === "succeeded" ? (
                   <ul>
@@ -92,7 +98,6 @@ function App() {
                         <button onClick={()=> handleEdit(user)}>Edit</button>
                       </li>
                     ))}
-                 
                    </ul>
                 ) : (
                   <p>Loading...</p>
@@ -100,8 +105,6 @@ function App() {
               </>
             }
           />
-
-          {/* Details route */}
           <Route path="/users/:id" element={<UserDetails />} />
         </Routes>
       </div>

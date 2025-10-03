@@ -44,20 +44,19 @@ function UserForm({ editingUser = null, onCancel = () => {} }) {
       setEmail("");
     }
   };
-
   return (
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 480 }}
+      sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 400 }}
     >
-      <Typography variant="h6">{editingUser ? "Edit User" : "Add New User"}</Typography>
+      <Typography variant="h6">{editingUser ? "Edit User" : "Add User"}</Typography>
       {error && <Typography color="error">{error}</Typography>}
 
       <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} required />
       <TextField label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-      <Box sx={{ display: "flex", gap: 1 }}>
+      <Box sx={{ display: "flex", gap: 2 }}>
         <Button type="submit" variant="contained">
           {editingUser ? "Save" : "Add User"}
         </Button>
